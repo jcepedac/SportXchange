@@ -1,8 +1,8 @@
 export const categories = [
-	{ id: 1, name: "Laptop" },
-	{ id: 2, name: "Electronics" },
-	{ id: 3, name: "Fashion" },
-	{ id: 4, name: "Phone" },
-	{ id: 5, name: "Jewelery" },
-	{ id: 6, name: "Furniture" },
+  { id: 1, name: "Football" },
+  { id: 2, name: "Basketball" },
+  { id: 3, name: "Volleyball" },
+  { id: 4, name: "Badminton" },
+  { id: 5, name: "Soccer" },
+  { id: 6, name: "Tennis" },
 ];
