@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 // This is your test secret API key.
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_PUBLISHABLE_KEY);
 
 app.use(express.json());
 app.use(cors());

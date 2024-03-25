@@ -3,6 +3,7 @@ import {
   PaymentElement,
   useStripe,
   useElements,
+  CardElement,
 } from "@stripe/react-stripe-js";
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import Breadcrumbs from "../breadcrumbs/Breadcrumbs";
@@ -52,38 +53,59 @@ const CheckoutForm = () => {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setMessage(null);
+  //   if (!stripe || !elements) {
+  //     return;
+  //   }
+  //   setIsLoading(true);
+  //   const confirmPayment = await stripe
+  //     .confirmPayment({
+  //       elements,
+  //       confirmParams: {
+  //         // Make sure to change this to your payment completion page
+  //         return_url: "http://localhost:5173/checkout-success",
+  //       },
+  //       redirect: "if_required",
+  //     })
+  //     .then((res) => {
+  //       if (res.error) {
+  //         setMessage(res.error.message);
+  //         toast.error(res.error.message);
+  //         return;
+  //       }
+  //       if (res.paymentIntent) {
+  //         if (res.paymentIntent.status === "succeeded") {
+  //           setIsLoading(false);
+  //           toast.success("Payment Successful");
+  //           saveOrder();
+  //           navigate("/checkout-success", { replace: true });
+  //         }
+  //       }
+  //     });
+  //   setIsLoading(false);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null);
     if (!stripe || !elements) {
       return;
     }
-    setIsLoading(true);
-    const confirmPayment = await stripe
-      .confirmPayment({
-        elements,
-        confirmParams: {
-          // Make sure to change this to your payment completion page
-          return_url: "http://localhost:5173/checkout-success",
-        },
-        redirect: "if_required",
-      })
-      .then((res) => {
-        if (res.error) {
-          setMessage(res.error.message);
-          toast.error(res.error.message);
-          return;
-        }
-        if (res.paymentIntent) {
-          if (res.paymentIntent.status === "succeeded") {
-            setIsLoading(false);
-            toast.success("Payment Successful");
-            saveOrder();
-            navigate("/checkout-success", { replace: true });
-          }
-        }
-      });
-    setIsLoading(false);
+
+    const cardElement = elements.getElement(CardElement);
+
+    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: cardElement,
+      },
+    });
+
+    if (error) {
+      console.log('[error]', error);
+    } else {
+      console.log('[PaymentIntent]', paymentIntent);
+    }
   };
 
   useEffect(() => {
@@ -110,6 +132,7 @@ const CheckoutForm = () => {
             <h1 className="text-3xl font-light mb-2">Stripe Checkout</h1>
             <form className="md:w-[30rem]" onSubmit={handleSubmit}>
               <PaymentElement id="payment-element" />
+              <CardElement />
               <button
                 disabled={isLoading || !stripe || !elements}
                 id="submit"
