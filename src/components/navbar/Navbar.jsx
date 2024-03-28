@@ -195,6 +195,11 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
+                      <Link to="/i-posted" className="text-lg text-primary">
+                        Items Posted
+                      </Link>
+                    </li>
+                    <li>
                       <Link to="/i-sold" className="text-lg text-primary">
                         Items I've Sold
                       </Link>

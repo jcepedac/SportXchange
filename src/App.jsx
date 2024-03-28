@@ -26,6 +26,8 @@ import {
   Review,
 } from "./pages";
 
+import Allproductsposted from "./pages/allProducts/Allproductsposted";
+
 const App = () => {
   return (
     <>
@@ -68,6 +70,8 @@ const App = () => {
         <Route path="/checkout-details" element={<CheckoutDetails />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
+        <Route path="/i-posted" element={<Allproductsposted/>} />
+
         {/* ADMIN ROUTES */}
         <Route
           path="/admin/*"
