@@ -8,6 +8,7 @@ import {
   ProductDetails,
   ProtectedRoute,
   PostAD,
+  Footer
 } from "./components";
 import {
   Admin,
@@ -24,11 +25,13 @@ import {
   SoldHistory,
   ResetPassword,
   Review,
+  UserProfile
 } from "./pages";
 
 const App = () => {
   return (
     <>
+
       <ToastContainer position="bottom-right" autoClose={4000} closeOnClick />
       <Navbar />
       <Routes>
@@ -77,10 +80,11 @@ const App = () => {
             </AdminRoute>
           }
         />
-
+        <Route path="/user-profile" element={<UserProfile />} />
         {/* 404 routes */}
         <Route path="/*" element={<NotFound />} />
       </Routes>
+      <Footer />
       <Modal />
     </>
   );
