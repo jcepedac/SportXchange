@@ -30,6 +30,7 @@ const CheckoutForm = () => {
   const { cartItems, totalAmount } = useSelector((store) => store.cart);
   const { shippingAddress } = useSelector((store) => store.checkout);
 
+
   const saveOrder = () => {
     const date = new Date().toDateString();
     const time = new Date().toLocaleTimeString();
@@ -52,14 +53,43 @@ const CheckoutForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+    if (!clientSecret) {
+      return;
+    }
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent.status) {
+        case "succeeded":
+          setMessage("Payment succeeded!");
+          break;
+        case "processing":
+          setMessage("Your payment is processing.");
+          break;
+        case "requires_payment_method":
+          setMessage("Your payment was not successful, please try again.");
+          break;
+        default:
+          setMessage("Something went wrong.");
+          break;
+      }
+    });
+  }, [stripe]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(null);
+    // setMessage(null);
     if (!stripe || !elements) {
       return;
     }
     setIsLoading(true);
-    const confirmPayment = await stripe
+    // const confirmPayment = await stripe
+    const { error } = await stripe
       .confirmPayment({
         elements,
         confirmParams: {
@@ -86,17 +116,11 @@ const CheckoutForm = () => {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    if (!stripe) {
-      return;
-    }
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-    if (!clientSecret) {
-      return;
-    }
-  }, [stripe]);
+  const paymentElementOptions = {
+    layout: "tabs"
+  }
+
+
 
   return (
     <>
@@ -108,8 +132,8 @@ const CheckoutForm = () => {
           </div>
           <div className="rounded-md shadow-xl pt-4 pb-8 px-10">
             <h1 className="text-3xl font-light mb-2">Stripe Checkout</h1>
-            <form className="md:w-[30rem]" onSubmit={handleSubmit}>
-              <PaymentElement id="payment-element" />
+            <form id="payment-form" className="md:w-[30rem]" onSubmit={handleSubmit}>
+              <PaymentElement id="payment-element" options={paymentElementOptions} />
               <button
                 disabled={isLoading || !stripe || !elements}
                 id="submit"

@@ -196,7 +196,7 @@ const Navbar = () => {
                     </li>
                     <li>
                       <Link to="/my-orders" className="text-lg text-primary">
-                        My Orders CRISTY
+                        My Orders
                       </Link>
                     </li>
                     <li>

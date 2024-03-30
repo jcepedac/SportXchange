@@ -13,8 +13,8 @@
 		"@chakra-ui/react": "^2.8.2",
 		"@emailjs/browser": "^3.7.0",
 		"@reduxjs/toolkit": "^1.8.6",
-		"@stripe/react-stripe-js": "^1.14.0",
-		"@stripe/stripe-js": "^1.42.0",
+		"@stripe/react-stripe-js": "^1.16.5",
+		"@stripe/stripe-js": "^1.54.2",
 		"chart.js": "^3.9.1",
 		"cors": "^2.8.5",
 		"daisyui": "^2.31.0",
@@ -32,7 +32,7 @@
 		"react-star-rate": "^0.2.0",
 		"react-toastify": "^9.0.8",
 		"serve": "^14.0.1",
-		"stripe": "^10.15.0"
+		"stripe": "^10.17.0"
 	},
 	"devDependencies": {
 		"@types/react": "^18.0.17",
