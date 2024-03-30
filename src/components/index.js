@@ -30,3 +30,4 @@ export { default as ReviewComponent } from "./review/ReviewComponent";
 export { default as Search } from "./search/Search";
 export { default as Steps } from "./steps/Steps";
 export { default as PostAD } from "./postAD/postAD";
+export { default as Footer } from "./footer/Footer";

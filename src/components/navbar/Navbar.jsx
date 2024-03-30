@@ -190,6 +190,11 @@ const Navbar = () => {
                 {isUserLoggedIn ? (
                   <div>
                     <li>
+                      <Link to="/user-profile" className="text-lg text-primary">
+                        User Profile
+                      </Link>
+                    </li>
+                    <li>
                       <Link to="/my-orders" className="text-lg text-primary">
                         My Orders CRISTY
                       </Link>
