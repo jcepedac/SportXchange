@@ -8,7 +8,7 @@ import {
   ProductDetails,
   ProtectedRoute,
   PostAD,
-  Footer
+  Footer,
 } from "./components";
 import {
   Admin,
@@ -21,11 +21,12 @@ import {
   Home,
   NotFound,
   OrderDetails,
+  SellerOrderDetails,
   OrderHistory,
   SoldHistory,
   ResetPassword,
   Review,
-  UserProfile
+  UserProfile,
 } from "./pages";
 
 import Allproductsposted from "./pages/allProducts/Allproductsposted";
@@ -33,7 +34,6 @@ import Allproductsposted from "./pages/allProducts/Allproductsposted";
 const App = () => {
   return (
     <>
-
       <ToastContainer position="bottom-right" autoClose={4000} closeOnClick />
       <Navbar />
       <Routes>
@@ -47,6 +47,10 @@ const App = () => {
           }
         />
         <Route path="/order-details/:id" element={<OrderDetails />} />
+        <Route
+          path="seller/order-details/:id"
+          element={<SellerOrderDetails />}
+        />
         <Route
           path="/review-product/:id"
           element={
@@ -73,7 +77,7 @@ const App = () => {
         <Route path="/checkout-details" element={<CheckoutDetails />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout-success" element={<CheckoutSuccess />} />
-        <Route path="/i-posted" element={<Allproductsposted/>} />
+        <Route path="/i-posted" element={<Allproductsposted />} />
 
         {/* ADMIN ROUTES */}
         <Route

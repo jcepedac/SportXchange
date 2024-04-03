@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Header, OrdersComponent } from "../../components";
+import { Header, SellerOrdersComponent } from "../../components";
 
 import useFetchCollection from "../../hooks/useFetchCollection";
 import Loader from "../../components/loader/Loader";
@@ -21,16 +21,21 @@ const SoldHistory = () => {
   }, [dispatch, data]);
 
   function handleClick(orderId) {
-    navigate(`/order-details/${orderId}`);
+    navigate(`seller/order-details/${orderId}`);
   }
-
-  const soldOrders = orderHistory.filter((order) => order.sellerId === userId);
+  const soldOrders = orderHistory.filter((order) =>
+    order.cartItems.some((item) => item.sellerId === userId)
+  );
 
   return (
     <>
       {isLoading && <Loader />}
       <main className="w-full mx-auto px-2 lg:w-9/12 md:px-6 mt-6 ">
-        <OrdersComponent orders={soldOrders} user={true} admin={false} />
+        <SellerOrdersComponent
+          orders={soldOrders}
+          seller={true}
+          admin={false}
+        />
       </main>
     </>
   );

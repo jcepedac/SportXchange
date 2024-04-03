@@ -10,6 +10,7 @@ export { default as CheckoutDetails } from "./checkout/CheckoutDetails";
 export { default as Checkout } from "./checkout/Checkout";
 export { default as CheckoutSuccess } from "./checkout/CheckoutSuccess";
 export { default as OrderDetails } from "./orderDetails/OrderDetails";
+export { default as SellerOrderDetails } from "./orderDetails/SellerOrderDetails";
 export { default as Review } from "./reviewProduct/Review";
 export { default as SoldHistory } from "./soldHistory/SoldHistory";
-export { default as UserProfile } from './userProfile/UserProfile';
+export { default as UserProfile } from "./userProfile/UserProfile";

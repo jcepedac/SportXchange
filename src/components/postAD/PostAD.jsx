@@ -44,6 +44,11 @@ const PostAD = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userId) {
+      window.alert("You must log in to post a product");
+      return;
+    }
     setLoading(true);
     setUploadStatus("Upload started");
     const finalBrand = isOtherBrand ? otherBrand : brand;
@@ -97,95 +102,91 @@ const PostAD = () => {
               <h2 className="mb-6 text-2xl font-semibold text-center">
                 Upload Product
               </h2>
-              {loading ? (
-                <p>Loading...</p>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
+                    required
+                    className="input input-bordered w-full max-w-xs mx-auto block"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="Price"
+                    required
+                    className="input input-bordered w-full max-w-xs mx-auto block"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Description"
+                    required
+                    className="textarea textarea-bordered w-full mx-auto block"
+                    rows="3"
+                  />
+                </div>
+                <div>
+                  <select
+                    value={isOtherBrand ? "Other" : brand}
+                    onChange={handleBrandChange}
+                    required
+                    className="input input-bordered w-full max-w-xs mx-auto block"
+                  >
+                    <option value="">Select a brand</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Puma">Puma</option>
+                    <option value="Yonex">Yonex</option>
+                    <option value="Under Armour">Under Armour</option>
+                    <option value="Reebok">Reebok</option>
+                    <option value="New Balance">New Balance</option>
+                    <option value="Asics">Asics</option>
+                    <option value="Mizuno">Mizuno</option>
+                    <option value="Wilson">Wilson</option>
+                    <option value="Salomon">Salomon</option>
+                    <option value="North Face">North Face</option>
+                    <option value="Columbia">Columbia</option>
+                    <option value="Merrell">Merrell</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                {isOtherBrand && (
                   <div>
                     <input
                       type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Name"
+                      value={otherBrand}
+                      onChange={handleOtherBrandChange}
+                      placeholder="Enter your brand"
                       required
                       className="input input-bordered w-full max-w-xs mx-auto block"
                     />
                   </div>
-                  <div>
-                    <input
-                      type="number"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                      placeholder="Price"
-                      required
-                      className="input input-bordered w-full max-w-xs mx-auto block"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      placeholder="Description"
-                      required
-                      className="textarea textarea-bordered w-full mx-auto block"
-                      rows="3"
-                    />
-                  </div>
-                  <div>
-                    <select
-                      value={isOtherBrand ? "Other" : brand}
-                      onChange={handleBrandChange}
-                      required
-                      className="input input-bordered w-full max-w-xs mx-auto block"
-                    >
-                      <option value="">Select a brand</option>
-                      <option value="Nike">Nike</option>
-                      <option value="Adidas">Adidas</option>
-                      <option value="Puma">Puma</option>
-                      <option value="Yonex">Yonex</option>
-                      <option value="Under Armour">Under Armour</option>
-                      <option value="Reebok">Reebok</option>
-                      <option value="New Balance">New Balance</option>
-                      <option value="Asics">Asics</option>
-                      <option value="Mizuno">Mizuno</option>
-                      <option value="Wilson">Wilson</option>
-                      <option value="Salomon">Salomon</option>
-                      <option value="North Face">North Face</option>
-                      <option value="Columbia">Columbia</option>
-                      <option value="Merrell">Merrell</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  {isOtherBrand && (
-                    <div>
-                      <input
-                        type="text"
-                        value={otherBrand}
-                        onChange={handleOtherBrandChange}
-                        placeholder="Enter your brand"
-                        required
-                        className="input input-bordered w-full max-w-xs mx-auto block"
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <input
-                      type="file"
-                      onChange={handleImageChange}
-                      required
-                      className="input input-bordered w-full max-w-xs mx-auto block"
-                    />
-                  </div>
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-primary px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                    >
-                      Upload
-                    </button>
-                  </div>
-                </form>
-              )}
+                )}
+                <div>
+                  <input
+                    type="file"
+                    onChange={handleImageChange}
+                    required
+                    className="input input-bordered w-full max-w-xs mx-auto block"
+                  />
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="btn btn-primary px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  >
+                    Upload
+                  </button>
+                </div>
+              </form>
             </section>
           </div>
         </main>
